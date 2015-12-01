@@ -6,7 +6,7 @@
 #    By: jlagneau <jlagneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/21 08:29:58 by jlagneau          #+#    #+#              #
-#    Updated: 2015/12/01 06:02:00 by jlagneau         ###   ########.fr        #
+#    Updated: 2015/12/01 10:00:25 by jlagneau         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -25,6 +25,7 @@ endif
 endif
 
 LIB       = libft/
+MLX		  = minilibx/
 
 OBJS_PATH = bin/
 SRCS_PATH = src/
@@ -32,7 +33,7 @@ HEAD_PATH = include/
 
 CC        = gcc
 CFLAGS    = -I$(HEAD_PATH) -I$(LIB)$(HEAD_PATH) -Wall -Wextra -Werror
-LDFLAGS   = -L$(LIB)
+LDFLAGS   = -L/usr/X11/lib -lXext -lX11 -L$(MLX) -lmlx -L$(LIB)
 
 RM        = rm
 RMFLAGS   = -rf
@@ -56,12 +57,14 @@ $(NAME): CFLAGS += -g3
 $(NAME): LDFLAGS += -lft
 $(NAME): $(OBJS)
 	make -C $(LIB)
+	make -C $(MLX)
 	printf "[\033[36m%20s\033[0m] Linking and indexing" $(NAME)
 	$(CC) $^ $(LDFLAGS) -o $@
 	printf " [\033[32mDONE\033[0m]\n"
 
 $(DEB_NAME): $(DEB_OBJS)
 	make -C $(LIB) debug
+	make -C $(MLX)
 	printf "[\033[36m%20s\033[0m] Linking and indexing" $(DEB_NAME)
 	$(CC) $^ $(LDFLAGS) -o $@
 	printf " [\033[32mDONE\033[0m]\n"
@@ -98,6 +101,7 @@ clean:
 	$(RM) $(RMFLAGS) $(OBJS_PATH)
 	printf "     [\033[32mDONE\033[0m]\n"
 	make -C $(LIB) clean
+	make -C $(MLX) clean
 
 fclean:
 	printf "[\033[36m%20s\033[0m] Removing objects" $(NAME)
@@ -107,6 +111,7 @@ fclean:
 	$(RM) $(RMFLAGS) $(NAME) $(DEB_NAME)
 	printf "      [\033[32mDONE\033[0m]\n"
 	make -C $(LIB) fclean
+	make -C $(MLX) clean
 
 re: fclean all
 

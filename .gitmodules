@@ -1,3 +1,7 @@
 [submodule "libft"]
 	path = libft
 	url = https://github.com/jlagneau/libft.git
+[submodule "minilibx"]
+	path = minilibx
+	url = https://github.com/jlagneau/minilibx.git
+	ignore = dirty
