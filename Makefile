@@ -6,7 +6,7 @@
 #    By: jlagneau <jlagneau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/21 08:29:58 by jlagneau          #+#    #+#              #
-#    Updated: 2015/12/01 10:00:25 by jlagneau         ###   ########.fr        #
+#    Updated: 2015/12/01 10:34:00 by jlagneau         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,7 +32,7 @@ SRCS_PATH = src/
 HEAD_PATH = include/
 
 CC        = gcc
-CFLAGS    = -I$(HEAD_PATH) -I$(LIB)$(HEAD_PATH) -Wall -Wextra -Werror
+CFLAGS    = -I$(HEAD_PATH) -I$(LIB)$(HEAD_PATH) -I$(MLX) -Wall -Wextra -Werror
 LDFLAGS   = -L/usr/X11/lib -lXext -lX11 -L$(MLX) -lmlx -L$(LIB)
 
 RM        = rm
