@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   perspective.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlagneau <jlagneau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 08:36:28 by jlagneau          #+#    #+#             */
-/*   Updated: 2013/12/22 17:40:43 by jlagneau         ###   ########.fr       */
+/*   Updated: 2013/12/21 19:58:41 by jlagneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int				main(int argc, char **argv)
+void			switch_perspective(t_env *e)
 {
-	int			ret;
-	char		***coord;
+	if (e->pers == &get_realcoord_para)
+		e->pers = &get_realcoord_iso;
+	else
+		e->pers = &get_realcoord_para;
+}
 
-	coord = NULL;
-	if (argc == 1 || argc > 3)
-		print_usage();
-	else if (argc == 2)
-		coord = arg_getcoord(argv[1]);
-	else if (argc == 3)
-	{
-		coord = arg_getcoord(argv[2]);
-		if (ft_strcmp(argv[1], "-d") == 0)
-			print_debug(coord);
-		else
-			print_usage();
-	}
-	ret = init(coord);
-	return (ret);
+void			get_realcoord_para(int x, int y, int z, t_coord *coord)
+{
+	coord->x = (x + (-CTE1 * y)) * PAD + 250;
+	coord->y = (y + ((-CTE1 / 2.0) * (z / 3))) * PAD + 200.0;
+}
+
+void			get_realcoord_iso(int x, int y, int z, t_coord *coord)
+{
+	coord->x = ((CTE1 * x) - (CTE2 * y)) * PAD + 300;
+	coord->y = ((z * -0.1) + ((CTE1 / 2) * x) + ((CTE2 / 2) * y)) * PAD2 + 150;
 }

@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlagneau <jlagneau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/02 08:36:28 by jlagneau          #+#    #+#             */
-/*   Updated: 2013/12/22 17:40:43 by jlagneau         ###   ########.fr       */
+/*   Created: 2013/12/22 17:27:05 by jlagneau          #+#    #+#             */
+/*   Updated: 2013/12/22 17:27:24 by jlagneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int				main(int argc, char **argv)
+void				put_pixel(int x, int y, int c, t_env *e)
 {
-	int			ret;
-	char		***coord;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
 
-	coord = NULL;
-	if (argc == 1 || argc > 3)
-		print_usage();
-	else if (argc == 2)
-		coord = arg_getcoord(argv[1]);
-	else if (argc == 3)
+	r = (c & 0xFF0000) >> 16;
+	g = (c & 0x00FF00) >> 8;
+	b = (c & 0x0000FF);
+	if (x <= WIDTH && y <= HEIGHT && x > 0 && y > 0)
 	{
-		coord = arg_getcoord(argv[2]);
-		if (ft_strcmp(argv[1], "-d") == 0)
-			print_debug(coord);
-		else
-			print_usage();
+		e->data[y * e->sl + x * e->bpp / 8] = b;
+		e->data[y * e->sl + x * e->bpp / 8 + 1] = g;
+		e->data[y * e->sl + x * e->bpp / 8 + 2] = r;
 	}
-	ret = init(coord);
-	return (ret);
 }

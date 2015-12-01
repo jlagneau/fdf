@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlagneau <jlagneau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 08:36:28 by jlagneau          #+#    #+#             */
-/*   Updated: 2013/12/22 17:40:43 by jlagneau         ###   ########.fr       */
+/*   Updated: 2013/12/22 18:26:29 by jlagneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int				main(int argc, char **argv)
+int		col(int z1, int z2)
 {
-	int			ret;
-	char		***coord;
-
-	coord = NULL;
-	if (argc == 1 || argc > 3)
-		print_usage();
-	else if (argc == 2)
-		coord = arg_getcoord(argv[1]);
-	else if (argc == 3)
-	{
-		coord = arg_getcoord(argv[2]);
-		if (ft_strcmp(argv[1], "-d") == 0)
-			print_debug(coord);
-		else
-			print_usage();
-	}
-	ret = init(coord);
-	return (ret);
+	if (z1 < z2)
+		z1 = z2;
+	if (z1 < 0)
+		return (0x0000FF);
+	else if (z1 == 0)
+		return (0xFFFFFF);
+	else if (z1 == 30)
+		return (0x00FF00);
+	else
+		return (0xFF0000);
 }

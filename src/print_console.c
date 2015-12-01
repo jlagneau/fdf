@@ -1,35 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_console.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlagneau <jlagneau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 08:36:28 by jlagneau          #+#    #+#             */
-/*   Updated: 2013/12/22 17:40:43 by jlagneau         ###   ########.fr       */
+/*   Updated: 2013/12/18 12:29:47 by jlagneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int				main(int argc, char **argv)
+void	print_usage(void)
 {
-	int			ret;
-	char		***coord;
+	ft_putendl("\033[31mUsage :\033[0m ./fdf [-dh] [filename]");
+	ft_putendl("\t-d\tPrint debug");
+	ft_putendl("\t-h\tPrint this help message");
+	exit(0);
+}
 
-	coord = NULL;
-	if (argc == 1 || argc > 3)
-		print_usage();
-	else if (argc == 2)
-		coord = arg_getcoord(argv[1]);
-	else if (argc == 3)
+void	print_debug(char ***coord)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (coord[y])
 	{
-		coord = arg_getcoord(argv[2]);
-		if (ft_strcmp(argv[1], "-d") == 0)
-			print_debug(coord);
-		else
-			print_usage();
+		x = 0;
+		while (coord[y][x])
+		{
+			if (ft_strlen(coord[y][x]) == 2)
+				ft_putstr(coord[y][x]);
+			else
+			{
+				ft_putchar(' ');
+				ft_putstr(coord[y][x]);
+			}
+			ft_putchar(' ');
+			x++;
+		}
+		ft_putchar('\n');
+		y++;
 	}
-	ret = init(coord);
-	return (ret);
 }
