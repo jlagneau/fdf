@@ -44,7 +44,7 @@ RM        = rm -rf
 
 # Flags
 CFLAGS    = -Wall -Wextra -Werror -pedantic
-CPPFLAGS  = -I$(HEAD_PATH) -I$(LIBH_PATH)
+CPPFLAGS  = -I$(HEAD_PATH) -I$(LIBH_PATH) -I$(MLX_PATH)
 LDFLAGS   = -L/usr/X11/lib -L$(MLX_PATH) -L$(LIB_PATH)
 LDLIBS    = -lXext -lX11 -lmlx
 DEPSFLAGS = -MMD -MF"$(DEPS_PATH)$(notdir $(@:.o=.d))"
