@@ -72,6 +72,7 @@ endif
 $(NAME): CFLAGS += -O3
 $(NAME): LDLIBS += -lft
 $(NAME): $(OBJS)
+	@git submodule update --init --recursive
 	@make -C $(LIB_PATH)
 	@make -C $(MLX_PATH)
 	$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
@@ -79,6 +80,7 @@ $(NAME): $(OBJS)
 debug: CFLAGS += -g3
 debug: LDLIBS += -lft_debug
 debug: $(DEB_OBJS)
+	@git submodule update --init --recursive
 	@make -C $(LIB_PATH) debug
 	@make -C $(MLX_PATH)
 	$(CC) $^ $(LDFLAGS) $(LDLIBS) -o $@
