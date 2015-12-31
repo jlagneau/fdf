@@ -30,7 +30,7 @@ endif
 LIB_PATH  = libft/
 LIBH_PATH = libft/include/
 
-MLX_PATH  = minilibx/
+MLX_PATH  = libmlx/
 
 SRCS_PATH = src/
 HEAD_PATH = include/
